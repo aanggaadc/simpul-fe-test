@@ -1,6 +1,6 @@
 import { useChatState } from "..";
 import Message from "./message";
-import { ArrowRightIcon, CloseIcon } from "../../icons";
+import { ArrowRightIcon, CloseIcon, ArrowDownIcon } from "../../icons";
 
 const dummyMessages = [
   {
@@ -102,15 +102,21 @@ const ChatRoom = () => {
             timestamp={msg.timestamp}
           />
         ))}
+
+        <button className="rounded-[5px] sticky bottom-0 left-0 right-0 mx-auto p-3 bg-light-blue flex items-center gap-1 text-primary font-bold">
+          New Message
+          <ArrowDownIcon />
+        </button>
       </div>
 
-      <div className="flex px-5 pt-[10px] pb-[19px]">
+      <div className="flex px-5 pt-[10px] pb-[19px] justify-between gap-[13px]">
         <input
           type="text"
-          placeholder="Type a message..."
-          className="flex-1 p-2 border border-gray-300 rounded"
+          placeholder="Type a new message"
+          className="flex-grow py-[13px] px-4 border border-[#828282] rounded"
         />
-        <button className="ml-2 p-2 bg-blue-500 text-white rounded">
+
+        <button className="py-[14px] px-[21px] bg-primary text-white rounded font-bold">
           Send
         </button>
       </div>

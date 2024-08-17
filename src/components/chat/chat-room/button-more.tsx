@@ -54,6 +54,7 @@ const ButtonMore = () => {
         animate={isOpen ? "open" : "closed"}
       >
         <button
+          onClick={() => setIsOpen(false)}
           className="w-full px-[18px] py-[11px] text-sm text-left text-[#2F80ED] border-b border-[#BDBDBD]"
           role="menuitem"
           tabIndex={-1}
@@ -62,6 +63,7 @@ const ButtonMore = () => {
           Edit
         </button>
         <button
+          onClick={() => setIsOpen(false)}
           className="w-full px-[18px] py-[11px] text-sm text-left text-[#EB5757]"
           role="menuitem"
           tabIndex={-1}
