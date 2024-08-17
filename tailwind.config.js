@@ -6,10 +6,14 @@ export default {
       colors: {
         primary: "#2F80ED",
         purple: "#8785FF",
+        "light-purple": "#EEDCFF",
+        "dark-purple": "#9B51E0",
         "light-gray": "#E0E0E0",
         gray: "#828282",
         "dark-gray": "#4F4F4F",
         orange: "#F8B76B",
+        "light-orange": "#FCEED3",
+        "dark-orange": "#E5A443",
       },
       fontFamily: {
         lato: ["Lato", "sans-serif"],
