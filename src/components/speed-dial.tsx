@@ -1,15 +1,21 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "../lib/utils";
 import { LightningIcon, ReaderIcon, QAIcon } from "./icons";
 
+interface SpeedDialProps {
+  onSelect: (action: string) => void;
+}
 interface Action {
+  id: number;
   name: string;
   background: string;
   icon: (active?: boolean) => JSX.Element;
+  onClick?: () => void;
 }
 
 const initialAction: Action = {
+  id: 1,
   name: "menu",
   background: "bg-primary",
   icon: () => <LightningIcon />,
@@ -17,6 +23,7 @@ const initialAction: Action = {
 
 const actions: Action[] = [
   {
+    id: 2,
     name: "task",
     background: "bg-orange",
     icon: (active = true) => (
@@ -25,8 +32,10 @@ const actions: Action[] = [
         color={active ? "#fff" : undefined}
       />
     ),
+    onClick: () => {},
   },
   {
+    id: 3,
     name: "inbox",
     background: "bg-purple",
     icon: (active = true) => {
@@ -37,10 +46,11 @@ const actions: Action[] = [
         />
       );
     },
+    onClick: () => {},
   },
 ];
 
-const SpeedDial = () => {
+const SpeedDial: React.FC<SpeedDialProps> = ({ onSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedAction, setSelectedAction] = useState<Action>(initialAction);
 
@@ -50,6 +60,7 @@ const SpeedDial = () => {
 
   const handleActionClick = (action: Action) => {
     setSelectedAction(action);
+    onSelect(action.name);
     setIsOpen(false);
   };
 
@@ -76,7 +87,7 @@ const SpeedDial = () => {
   );
 
   return (
-    <div className="fixed bottom-4 right-4 flex items-center">
+    <div className="fixed bottom-[27px] right-[34px] flex items-center">
       <AnimatePresence>
         {isOpen && (
           <div className="flex items-center gap-[26px] mr-[26px]">
@@ -101,7 +112,7 @@ const SpeedDial = () => {
         </button>
 
         {selectedAction.name !== "menu" && (
-          <div className="absolute top-0 right-1 w-full h-full rounded-full bg-light-gray" />
+          <div className="absolute top-0 right-2 w-full h-full rounded-full bg-[#4F4F4F]" />
         )}
       </div>
     </div>
