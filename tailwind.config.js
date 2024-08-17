@@ -14,6 +14,8 @@ export default {
         orange: "#F8B76B",
         "light-orange": "#FCEED3",
         "dark-orange": "#E5A443",
+        "light-blue": "#E9F3FF",
+        red: "#EB5757",
       },
       fontFamily: {
         lato: ["Lato", "sans-serif"],
