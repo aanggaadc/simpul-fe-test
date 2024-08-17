@@ -3,30 +3,40 @@ import { SearchIcon } from "../icons";
 
 interface ChatListProps {}
 
-const conversations = [
+export const conversations = [
   {
     id: 1,
-    name: "Person One",
-    lastMessage: "Last message text...",
-    time: "12:30 PM",
+    title: "109220-Naturalization",
+    name: "Cameron Phillips",
+    lastMessage: "Please check this out!",
+    time: "02/06/2021 10:45",
+    isNew: true,
   },
   {
     id: 2,
-    name: "Person Two",
-    lastMessage: "Last message text...",
-    time: "11:00 AM",
+    title:
+      "Jeannette Moraima Guaman Chamba (Hutto I-589) [ Hutto Follow Up - Brief Service ]",
+    name: "Ellen",
+    lastMessage: "Hey, please read.",
+    time: "02/06/2021 10:45",
+    isNew: false,
   },
   {
     id: 3,
-    name: "Person Three",
-    lastMessage: "Last message text...",
-    time: "Yesterday",
+    title: "8405-Diana SALAZAR MUNGUIA",
+    name: "Cameron Phillips",
+    lastMessage:
+      "I understand your initial concerns and thats very valid, Elizabeth. But you are in good hands with us. We will make sure to guide you through the process and make it as smooth as possible.",
+    time: "02/06/2021 10:45",
+    isNew: false,
   },
   {
     id: 4,
-    name: "Person Four",
-    lastMessage: "Last message text...",
-    time: "2 days ago",
+    title: "FastVisa Support",
+    name: "",
+    lastMessage: "Hey there! Welcome to your inbox.",
+    time: "02/06/2021 10:45",
+    isNew: false,
   },
 ];
 
@@ -44,7 +54,7 @@ const ChatList: React.FC<ChatListProps> = () => {
 
       <div className="flex flex-col flex-grow overflow-scroll">
         {conversations.map((conv) => (
-          <ChatCard key={conv.id} />
+          <ChatCard key={conv.id} props={conv} />
         ))}
       </div>
     </div>

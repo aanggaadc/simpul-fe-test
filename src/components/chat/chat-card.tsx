@@ -1,13 +1,24 @@
 import { useChatState } from ".";
+import { conversations } from "./chat-list";
 import { PersonIcon } from "../icons";
 
-const ChatCard = () => {
+interface ChatCardProps {
+  props: (typeof conversations)[0];
+}
+
+const ChatCard: React.FC<ChatCardProps> = ({ props }) => {
+  const { title, name, lastMessage, time, isNew } = props;
   const { setActiveSection } = useChatState();
+
   return (
     <div
       onClick={() => setActiveSection("room")}
-      className="flex py-[22px] border-b border-[#828282] last:border-none cursor-pointer"
+      className="relative flex py-[22px] border-b border-[#828282] last:border-none cursor-pointer"
     >
+      {isNew && (
+        <div className="absolute bottom-7 right-0 w-[10px] aspect-square rounded-full bg-red" />
+      )}
+
       <div className="flex">
         <div className="w-[34px] h-[34px] rounded-full bg-light-gray flex items-center justify-center">
           <PersonIcon color="#000" opacity="0.54" />
@@ -20,15 +31,15 @@ const ChatCard = () => {
       <div className="flex-grow">
         <div className="flex gap-[16px]">
           <p className="text-primary font-bold max-w-[414px] text-[17px]">
-            Jeannette Moraima Guaman Chamba (Hutto I-589) [ Hutto Follow Up -
-            Brief Service ]
+            {title}
           </p>
-          <p className="text-dark-gray text-sm">02/06/2021 10:45</p>
+          <p className="text-dark-gray text-sm">{time}</p>
         </div>
-        <p className="text-dark-gray font-semibold">Cameron Phillips :</p>
+
+        {name && <p className="text-dark-gray font-semibold">{name} :</p>}
+
         <p className="max-w-[450px] line-clamp-1 text-dark-gray text-sm">
-          I understand your initial concerns and thats very valid, Elizabeth.
-          But you fdsfsddsfsfdsfdsfdsfds
+          {lastMessage}
         </p>
       </div>
     </div>
