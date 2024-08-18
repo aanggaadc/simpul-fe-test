@@ -1,5 +1,5 @@
 import React from "react";
-import { useChatState } from ".";
+import { useChatState } from "@/providers/chat-provider";
 import { formatDate } from "../../lib/utils";
 import Message from "./message";
 import { ArrowRightIcon, CloseIcon, ArrowDownIcon } from "../icons";

@@ -1,5 +1,5 @@
-import { useChatState } from ".";
-import { conversations } from "./chat-list";
+import { useChatState } from "@/providers/chat-provider";
+import { conversations } from "@/fixtures/chat";
 import { PersonIcon } from "../icons";
 
 interface ChatCardProps {

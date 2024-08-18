@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ChatProvider from "./providers/chat-provider";
 import Chat from "./components/chat";
 import Task from "./components/task";
 import SpeedDial from "./components/speed-dial";
@@ -7,7 +8,11 @@ function App() {
   const [showMenu, setShowMenu] = useState("");
 
   const content: { [key: string]: JSX.Element } = {
-    inbox: <Chat />,
+    inbox: (
+      <ChatProvider>
+        <Chat />
+      </ChatProvider>
+    ),
     task: <Task />,
   };
 
