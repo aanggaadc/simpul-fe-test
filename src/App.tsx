@@ -23,8 +23,14 @@ function App() {
 
   return (
     <main className="flex h-screen items-center justify-center font-lato bg-[#333333]">
-      {content[activePopup]}
-      <SpeedDial onSelect={(menu: string) => setActivePopup(menu)} />
+      <h1 className="text-center text-white font-bold text-2xl xl:hidden">
+        This app is only available on larger screens
+      </h1>
+
+      <div className="hidden xl:block">
+        {content[activePopup]}
+        <SpeedDial onSelect={(menu: string) => setActivePopup(menu)} />
+      </div>
     </main>
   );
 }
