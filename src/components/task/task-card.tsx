@@ -45,44 +45,36 @@ const TaskCard: React.FC<TaskCardProps> = ({ props }) => {
   const [editTitle, setEditTitle] = useState(false);
   const [editDescription, setEditDescription] = useState(false);
 
-  const onChecked = (id: number) => {
+  const updateTask = (updatedTask: Partial<TaskType>) => {
     setTaskList((prev) =>
-      prev.map((task) =>
-        task.id === id ? { ...task, isCompleted: !task.isCompleted } : task
-      )
+      prev.map((task) => (task.id === id ? { ...task, ...updatedTask } : task))
     );
   };
 
+  const onChecked = () => {
+    updateTask({ isCompleted: !isCompleted });
+  };
+
+  const onDelete = () => {
+    setTaskList((prev) => prev.filter((task) => task.id !== id));
+  };
+
   const onEditTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCurrentTitle(e.target.value);
-    setTaskList((prev) =>
-      prev.map((task) =>
-        task.id === id ? { ...task, title: e.target.value } : task
-      )
-    );
+    const newTitle = e.target.value;
+    setCurrentTitle(newTitle);
+    updateTask({ title: newTitle });
   };
 
   const onSelectDate = (date: Date | undefined) => {
     if (!date) return;
     setDate(date);
-    setTaskList((prev) =>
-      prev.map((task) =>
-        task.id === id ? { ...task, targetDate: date } : task
-      )
-    );
+    updateTask({ targetDate: date });
   };
 
   const onEditDescription = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setCurrentDescription(e.target.value);
-    setTaskList((prev) =>
-      prev.map((task) =>
-        task.id === id ? { ...task, description: e.target.value } : task
-      )
-    );
-  };
-
-  const onDelete = () => {
-    setTaskList((prev) => prev.filter((task) => task.id !== id));
+    const newDescription = e.target.value;
+    setCurrentDescription(newDescription);
+    updateTask({ description: newDescription });
   };
 
   useEffect(() => {
@@ -98,10 +90,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ props }) => {
       <AccordionItem value="item-1">
         <div className="flex items-center justify-between my-[22px]">
           <div className="flex items-center gap-[22px]">
-            <Checkbox
-              checked={isCompleted}
-              onCheckedChange={() => onChecked(id)}
-            />
+            <Checkbox checked={isCompleted} onCheckedChange={onChecked} />
 
             {editTitle ? (
               <Input
