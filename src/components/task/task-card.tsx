@@ -25,26 +25,39 @@ import {
 import { Textarea } from "../ui/textarea";
 import { MoreIcon, ClockIcon, CalendarIcon, PencilIcon } from "../icons";
 import { TaskType } from "@/fixtures/task";
+import { Input } from "../ui/input";
 
 interface TaskCardProps {
   props: TaskType;
 }
 
 const TaskCard: React.FC<TaskCardProps> = ({ props }) => {
-  const { id, title, description, targetDate, isCompleted } = props;
+  const inputRef = useRef<HTMLInputElement | null>(null);
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
+  const { id, title, description, targetDate, isCompleted } = props;
   const { setTaskList } = useTaskContext();
   const currentDate = new Date();
   const daysLeft = targetDate ? differenceInDays(targetDate, currentDate) : 0;
 
+  const [currentTitle, setCurrentTitle] = useState(title);
   const [date, setDate] = useState<Date | undefined>(targetDate);
   const [currentDescription, setCurrentDescription] = useState(description);
-  const [editMode, setEditMode] = useState(false);
+  const [editTitle, setEditTitle] = useState(false);
+  const [editDescription, setEditDescription] = useState(false);
 
   const onChecked = (id: number) => {
     setTaskList((prev) =>
       prev.map((task) =>
         task.id === id ? { ...task, isCompleted: !task.isCompleted } : task
+      )
+    );
+  };
+
+  const onEditTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCurrentTitle(e.target.value);
+    setTaskList((prev) =>
+      prev.map((task) =>
+        task.id === id ? { ...task, title: e.target.value } : task
       )
     );
   };
@@ -73,8 +86,12 @@ const TaskCard: React.FC<TaskCardProps> = ({ props }) => {
   };
 
   useEffect(() => {
-    if (editMode) textAreaRef.current?.focus();
-  }, [editMode]);
+    if (editDescription) textAreaRef.current?.focus();
+  }, [editDescription]);
+
+  useEffect(() => {
+    if (editTitle) inputRef.current?.focus();
+  }, [editTitle]);
 
   return (
     <Accordion type="single" collapsible className="w-full">
@@ -82,19 +99,31 @@ const TaskCard: React.FC<TaskCardProps> = ({ props }) => {
         <div className="flex items-center justify-between my-[22px]">
           <div className="flex items-center gap-[22px]">
             <Checkbox
-              id={id.toString()}
               checked={isCompleted}
               onCheckedChange={() => onChecked(id)}
             />
-            <label
-              htmlFor={id.toString()}
-              className={cn(
-                "font-bold  max-w-[356px] text-dark-gray text-base",
-                isCompleted && "line-through"
-              )}
-            >
-              {title}
-            </label>
+
+            {editTitle ? (
+              <Input
+                ref={inputRef}
+                type="text"
+                className="w-[380px] p-2 h-auto font-bold text-dark-gray text-base border-none"
+                placeholder={currentTitle || "Type Task Title"}
+                value={currentTitle}
+                onChange={onEditTitle}
+                onBlur={() => setEditTitle(false)}
+              />
+            ) : (
+              <h2
+                onClick={() => setEditTitle(true)}
+                className={cn(
+                  "font-bold  max-w-[356px] text-dark-gray text-base",
+                  isCompleted && "line-through"
+                )}
+              >
+                {title || "Type Task Title"}
+              </h2>
+            )}
           </div>
 
           <div className="flex items-center">
@@ -170,22 +199,22 @@ const TaskCard: React.FC<TaskCardProps> = ({ props }) => {
           <div className="flex gap-5">
             <button
               className="p-0 h-fit"
-              onClick={() => setEditMode(!editMode)}
+              onClick={() => setEditDescription(!editDescription)}
             >
               <PencilIcon color={description ? "#2F80ED" : undefined} />
             </button>
-            {editMode ? (
+            {editDescription ? (
               <Textarea
                 ref={textAreaRef}
                 placeholder="No Description"
                 className="max-w-[543px] h-fit text-dark-gray text-base border-none p-0"
                 value={currentDescription}
                 onChange={onEditDescription}
-                onBlur={() => setEditMode(false)}
+                onBlur={() => setEditDescription(false)}
               />
             ) : (
               <p
-                onClick={() => setEditMode(true)}
+                onClick={() => setEditDescription(true)}
                 className="max-w-[543px] text-dark-gray text-base"
               >
                 {currentDescription || "No Description"}

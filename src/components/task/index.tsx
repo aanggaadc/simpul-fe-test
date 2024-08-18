@@ -16,7 +16,7 @@ const Task = () => {
   const onAddTask = () => {
     const newTask = {
       id: taskList.length + 1,
-      title: "New Task",
+      title: "",
       description: "",
       targetDate: undefined,
       isCompleted: false,
