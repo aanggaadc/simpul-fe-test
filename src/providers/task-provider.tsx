@@ -1,7 +1,5 @@
 import { useContext, createContext, useState } from "react";
-import { tasks } from "@/fixtures/task";
-
-type TaskType = (typeof tasks)[0];
+import { TaskType, tasks } from "@/fixtures/task";
 
 interface TaskContextType {
   taskList: TaskType[];

@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -5,12 +6,13 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const formatDate = (dateString: string) => {
-  const options: Intl.DateTimeFormatOptions = {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  };
+export const formatDate = (
+  dateString: string | Date | undefined,
+  formatString: string = "do MMMM yyyy"
+) => {
+  if (!dateString) return;
 
-  return new Date(dateString).toLocaleDateString(undefined, options);
+  const date =
+    typeof dateString === "string" ? new Date(dateString) : dateString;
+  return format(date, formatString);
 };

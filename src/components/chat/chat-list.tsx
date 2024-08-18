@@ -32,7 +32,7 @@ const ChatList = () => {
           </span>
         </div>
       ) : (
-        <div className="flex flex-col flex-grow overflow-scroll">
+        <div className="flex flex-col flex-grow overflow-scroll pr-2">
           {conversations.map((conv) => (
             <ChatCard key={conv.id} props={conv} />
           ))}

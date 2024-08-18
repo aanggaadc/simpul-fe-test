@@ -2,15 +2,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@layer base {
-  * {
-    @apply !scroll-smooth;
-    -ms-overflow-style: none;
-    scrollbar-width: none !important;
-  }
-
-  *::-webkit-scrollbar {
-    display: none !important;
-  }
-}

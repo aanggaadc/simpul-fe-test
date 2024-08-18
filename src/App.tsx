@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ChatProvider from "./providers/chat-provider";
+import TaskProvider from "./providers/task-provider";
 import Chat from "./components/chat";
 import Task from "./components/task";
 import SpeedDial from "./components/speed-dial";
@@ -13,7 +14,11 @@ function App() {
         <Chat />
       </ChatProvider>
     ),
-    task: <Task />,
+    task: (
+      <TaskProvider>
+        <Task />
+      </TaskProvider>
+    ),
   };
 
   return (

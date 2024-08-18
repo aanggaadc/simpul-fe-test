@@ -7,3 +7,6 @@ export * from "./arrow-right";
 export * from "./arrow-down";
 export * from "./close";
 export * from "./more";
+export * from "./pencil";
+export * from "./clock";
+export * from "./calendar";
