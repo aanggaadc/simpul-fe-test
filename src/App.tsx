@@ -1,15 +1,19 @@
 import { useState } from "react";
-import { AnimatePresence } from "framer-motion";
 import Chat from "./components/chat";
+import Task from "./components/task";
 import SpeedDial from "./components/speed-dial";
 
 function App() {
   const [showMenu, setShowMenu] = useState("");
 
+  const content: { [key: string]: JSX.Element } = {
+    inbox: <Chat />,
+    task: <Task />,
+  };
+
   return (
     <main className="flex h-screen items-center justify-center font-lato bg-[#333333]">
-      <AnimatePresence>{showMenu === "inbox" && <Chat />}</AnimatePresence>
-
+      {content[showMenu]}
       <SpeedDial onSelect={(menu: string) => setShowMenu(menu)} />
     </main>
   );

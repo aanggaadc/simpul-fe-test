@@ -1,7 +1,7 @@
 import { useState, createContext, useContext } from "react";
-import { motion } from "framer-motion";
 import ChatList from "./chat-list";
 import ChatRoom from "./chat-room";
+import { PopupContainer } from "../shared";
 interface ChatContextType {
   activeSection: string;
   setActiveSection: React.Dispatch<React.SetStateAction<string>>;
@@ -27,15 +27,7 @@ const Chat = () => {
 
   return (
     <ChatContext.Provider value={{ activeSection, setActiveSection }}>
-      <motion.div
-        initial={{ opacity: 0, transform: "translateY(20px)" }}
-        animate={{ opacity: 1, transform: "translateY(0)" }}
-        exit={{ opacity: 0, transform: "translateY(20px)" }}
-        transition={{ duration: 0.2 }}
-        className="fixed bottom-[110px] rounded-md border border-[#BDBDBD] right-[34px] w-[734px] h-[737px] bg-white"
-      >
-        {content[activeSection]}
-      </motion.div>
+      <PopupContainer>{content[activeSection]}</PopupContainer>
     </ChatContext.Provider>
   );
 };

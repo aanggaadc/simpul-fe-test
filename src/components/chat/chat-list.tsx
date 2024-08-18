@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import Spinner from "../spinner";
 import ChatCard from "./chat-card";
+import { Spinner } from "../shared";
 import { SearchIcon } from "../icons";
 
 interface ChatListProps {}

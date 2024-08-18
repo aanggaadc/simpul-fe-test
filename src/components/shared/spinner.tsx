@@ -1,10 +1,10 @@
-import { cn } from "../lib/utils";
+import { cn } from "../../lib/utils";
 
 interface SpinnerProps {
   className?: string;
 }
 
-const Spinner: React.FC<SpinnerProps> = ({ className }) => {
+export const Spinner: React.FC<SpinnerProps> = ({ className }) => {
   return (
     <div
       className={cn(
@@ -19,5 +19,3 @@ const Spinner: React.FC<SpinnerProps> = ({ className }) => {
     </div>
   );
 };
-
-export default Spinner;
