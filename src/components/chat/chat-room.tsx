@@ -1,8 +1,8 @@
 import React from "react";
-import { useChatState } from "..";
-import { formatDate } from "../../../lib/utils";
+import { useChatState } from ".";
+import { formatDate } from "../../lib/utils";
 import Message from "./message";
-import { ArrowRightIcon, CloseIcon, ArrowDownIcon } from "../../icons";
+import { ArrowRightIcon, CloseIcon, ArrowDownIcon } from "../icons";
 import { messages } from "@/fixtures/chat";
 
 const ChatRoom = () => {
