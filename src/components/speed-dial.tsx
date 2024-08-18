@@ -2,7 +2,6 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "../lib/utils";
 import { LightningIcon, ReaderIcon, QAIcon } from "./icons";
-
 interface SpeedDialProps {
   onSelect: (action: string) => void;
 }
@@ -16,7 +15,7 @@ interface Action {
 
 const initialAction: Action = {
   id: 1,
-  name: "menu",
+  name: "",
   background: "bg-primary",
   icon: () => <LightningIcon />,
 };
@@ -56,6 +55,12 @@ const SpeedDial: React.FC<SpeedDialProps> = ({ onSelect }) => {
 
   const toggleOpen = () => {
     setIsOpen(!isOpen);
+  };
+
+  const closeMenu = () => {
+    onSelect("");
+    setIsOpen(false);
+    setSelectedAction(initialAction);
   };
 
   const handleActionClick = (action: Action) => {
@@ -111,8 +116,11 @@ const SpeedDial: React.FC<SpeedDialProps> = ({ onSelect }) => {
           {selectedAction.icon()}
         </button>
 
-        {selectedAction.name !== "menu" && (
-          <div className="absolute top-0 right-2 w-full h-full rounded-full bg-[#4F4F4F]" />
+        {selectedAction.name && (
+          <button
+            onClick={() => closeMenu()}
+            className="absolute top-0 right-3 w-full h-full rounded-full bg-[#4F4F4F]"
+          />
         )}
       </div>
     </div>
