@@ -1,4 +1,4 @@
-import { useChatState } from "@/providers/chat-provider";
+import { useChatContext } from "@/providers/chat-provider";
 import { conversations } from "@/fixtures/chat";
 import { PersonIcon } from "../icons";
 
@@ -8,7 +8,7 @@ interface ChatCardProps {
 
 const ChatCard: React.FC<ChatCardProps> = ({ props }) => {
   const { title, name, lastMessage, time, isNew } = props;
-  const { setActiveSection } = useChatState();
+  const { setActiveSection } = useChatContext();
 
   return (
     <div

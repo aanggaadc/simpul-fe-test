@@ -12,14 +12,6 @@ interface TaskProviderProps {
 
 const ChatContext = createContext<TaskContextType | undefined>(undefined);
 
-export const useTaskState = () => {
-  const context = useContext(ChatContext);
-  if (context === undefined) {
-    throw new Error("useTaskState must be used within a TaskContextProvider");
-  }
-  return context;
-};
-
 export const TaskProvider: React.FC<TaskProviderProps> = ({ children }) => {
   const [taskList, setTaskList] = useState(tasks);
 
@@ -28,6 +20,14 @@ export const TaskProvider: React.FC<TaskProviderProps> = ({ children }) => {
       {children}
     </ChatContext.Provider>
   );
+};
+
+export const useTaskContext = () => {
+  const context = useContext(ChatContext);
+  if (context === undefined) {
+    throw new Error("useTaskState must be used within a TaskContextProvider");
+  }
+  return context;
 };
 
 export default TaskProvider;

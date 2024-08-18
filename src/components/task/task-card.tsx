@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { useTaskState } from "@/providers/task-provider";
+import { useTaskContext } from "@/providers/task-provider";
 import { cn, formatDate } from "@/lib/utils";
 import { differenceInDays } from "date-fns";
 import {
@@ -33,7 +33,7 @@ interface TaskCardProps {
 const TaskCard: React.FC<TaskCardProps> = ({ props }) => {
   const { id, title, description, targetDate, isCompleted } = props;
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
-  const { setTaskList } = useTaskState();
+  const { setTaskList } = useTaskContext();
   const currentDate = new Date();
   const daysLeft = targetDate ? differenceInDays(targetDate, currentDate) : 0;
 

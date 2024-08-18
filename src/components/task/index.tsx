@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useTaskState } from "@/providers/task-provider";
+import { useTaskContext } from "@/providers/task-provider";
 import TaskCard from "./task-card";
 import {
   Select,
@@ -11,7 +11,7 @@ import { PopupContainer, Spinner } from "../shared";
 
 const Task = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const { taskList, setTaskList } = useTaskState();
+  const { taskList, setTaskList } = useTaskContext();
 
   const onAddTask = () => {
     const newTask = {
@@ -71,7 +71,7 @@ const Task = () => {
             </span>
           </div>
         ) : (
-          <div className="flex-grow overflow-scroll pr-2">
+          <div className="flex-grow overflow-y-scroll pr-2">
             {taskList.map((task) => (
               <TaskCard key={task.id} props={task} />
             ))}

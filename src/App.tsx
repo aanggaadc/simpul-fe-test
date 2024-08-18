@@ -6,7 +6,7 @@ import Task from "./components/task";
 import SpeedDial from "./components/speed-dial";
 
 function App() {
-  const [showMenu, setShowMenu] = useState("");
+  const [activePopup, setActivePopup] = useState("");
 
   const content: { [key: string]: JSX.Element } = {
     inbox: (
@@ -23,8 +23,8 @@ function App() {
 
   return (
     <main className="flex h-screen items-center justify-center font-lato bg-[#333333]">
-      {content[showMenu]}
-      <SpeedDial onSelect={(menu: string) => setShowMenu(menu)} />
+      {content[activePopup]}
+      <SpeedDial onSelect={(menu: string) => setActivePopup(menu)} />
     </main>
   );
 }

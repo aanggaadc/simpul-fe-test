@@ -11,14 +11,6 @@ interface ChatProviderProps {
 
 const ChatContext = createContext<ChatContextType | undefined>(undefined);
 
-export const useChatState = () => {
-  const context = useContext(ChatContext);
-  if (context === undefined) {
-    throw new Error("useChatState must be used within a ChatContextProvider");
-  }
-  return context;
-};
-
 export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
   const [activeSection, setActiveSection] = useState("list");
 
@@ -27,6 +19,14 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
       {children}
     </ChatContext.Provider>
   );
+};
+
+export const useChatContext = () => {
+  const context = useContext(ChatContext);
+  if (context === undefined) {
+    throw new Error("useChatState must be used within a ChatContextProvider");
+  }
+  return context;
 };
 
 export default ChatProvider;

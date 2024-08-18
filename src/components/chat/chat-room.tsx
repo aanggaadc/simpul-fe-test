@@ -1,5 +1,5 @@
 import React from "react";
-import { useChatState } from "@/providers/chat-provider";
+import { useChatContext } from "@/providers/chat-provider";
 import { formatDate } from "../../lib/utils";
 import Message from "./message";
 import { ArrowRightIcon, CloseIcon, ArrowDownIcon } from "../icons";
@@ -7,7 +7,7 @@ import { messages } from "@/fixtures/chat";
 
 const ChatRoom = () => {
   let newMessageHeaderShown = false;
-  const { setActiveSection } = useChatState();
+  const { setActiveSection } = useChatContext();
 
   return (
     <div className="flex flex-col h-full">
