@@ -3,6 +3,14 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply bg-[#333333];
+}
+
+.items-safe-end {
+  align-items: safe flex-end;
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }

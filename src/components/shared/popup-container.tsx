@@ -12,7 +12,7 @@ export const PopupContainer: React.FC<PopupContainerProps> = ({ children }) => {
         animate={{ opacity: 1, transform: "translateY(0)" }}
         exit={{ opacity: 0, transform: "translateY(20px)" }}
         transition={{ duration: 0.3 }}
-        className="fixed bottom-[110px] rounded-md border border-[#BDBDBD] right-[34px] w-[734px] h-[737px] bg-white"
+        className="rounded-md border border-[#BDBDBD] w-[734px] h-[737px] bg-white"
       >
         {children}
       </motion.div>
